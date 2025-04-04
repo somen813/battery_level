@@ -2,10 +2,6 @@ if (navigator.serviceWorker) {
 	navigator.serviceWorker.register ('/service-worker.js')
 }
 
-Notification.requestPermission().then((result) => {
-	console.log(result);
-});
-
 navigator.getBattery().then((battery) => {
 	console.log('Battery charging:', battery.charging);
 	console.log('Battery level:', battery.level * 100, '%');
@@ -36,13 +32,12 @@ navigator.getBattery().then((battery) => {
 		}
 		console.log('Battery charging status changed:', battery.charging);
 	};
-
 	battery.onlevelchange = () => {
 		 console.log('Battery level changed:', battery.level * 100, '%');
 		 if(battery.level === 0.5) {
-			const notification = new Notification(`バッテリー残量：${battery.level * 100}%`);
+			new Notification(`バッテリー残量：${battery.level * 100}%`);
 		 }else if(battery.level <= 10) {
-			const notification = new Notification(`バッテリー残量が非常に少ないです。残り${battery.level * 100}%`);
+			new Notification(`バッテリー残量が非常に少ないです。残り${battery.level * 100}%`);
 		 }
 	};
 });

@@ -1,12 +1,14 @@
-self.addEventListener('fetch', function (e) {
-	console.log('service worker fetch')
- })
- 
- self.addEventListener('install', function (e) {
+function notifyMe() {
+	if(!("Notification" in window)) {
+	  // ブラウザーが通知に対応しているか調べる
+	  alert("このブラウザーはデスクトップ通知に対応していません。");
+	}else if(Notification.permission !== "denied") {
+	  // ユーザーにその権限を要求する必要がある
+	  Notification.requestPermission();
+	}
+}
+
+self.addEventListener('install', function (e) {
 	console.log('service worker install')
- })
- 
- self.addEventListener('activate', function (e) {
-	console.log('service worker activate')
- })
- 
+	notifyMe();
+})
