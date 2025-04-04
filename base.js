@@ -1,11 +1,3 @@
-if (navigator.serviceWorker) {
-	navigator.serviceWorker.register ('/service-worker.js')
-}
-
-Notification.requestPermission().then((result) => {
-	console.log(result);
-});
-
 navigator.getBattery().then((battery) => {
 	console.log('Battery charging:', battery.charging);
 	console.log('Battery level:', battery.level * 100, '%');
